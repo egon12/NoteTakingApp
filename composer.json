@@ -1,0 +1,20 @@
+{
+    "name": "egon12/notetakingapp",
+    "description": "Try to learn ZendFramework2",
+    "require": {
+        "zendframework/zendframework": "2.3.*",
+        "zf-commons/zfc-user": "dev-master",
+        "bjyoungblood/bjy-authorize": "dev-master"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master",
+        "bjyoungblood/bjy-profiler": "dev-master"
+    },
+    "license": "None",
+    "authors": [
+        {
+            "name": "Egon Firman",
+            "email": "egon.firman@gmail.com"
+        }
+    ]
+}
