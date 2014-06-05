@@ -1,0 +1,65 @@
+<h3>Notes</h3>
+<p>Welcome <?php echo $this->zfcUserDisplayName() ?>, hope you don't need anything. But mabe some kind of 
+Text quote or something can cheer you up. Maybe, or maybe it will be anoying It's up to you to
+get this</p>
+<div class="row">
+<div class="col-md-10">
+<table id="notes" class="table">
+    <tr>
+        <th>Title</th>
+        <th>Last Modified</th>
+        <th>Excerpt</th>
+        <th>edit by</th>
+        <th class="action">Action</th>
+    </tr>
+    <?php 
+    if ($notes->count() > 0):
+    // todo remove to Module ViewHelper
+    $users = array();
+    foreach ($notes as $note):
+    ?>
+    <tr>
+        <td>
+          <a href="<?php echo $this->url('noteEdit', array('id' => $note->getId())) ?>" >
+                <?php echo $note->getTitle(); ?>
+            </a>
+        </td>
+        <td><?php echo $note->getTimestamp(); ?></td>
+        <td><?php echo $note->getBodyExcerpt(); ?></td>
+        <td>
+            <?php 
+                // todo remove to Module ViewHelper
+                if (($id = $note->getUserId()) != null) {
+                    if (!isset($users[$id])) {
+                        $users[$id] = $userMapper->findById($id);
+                    }
+                    $user = $users[$id];
+                    if ($user) { echo $user->getUsername(); }
+                }
+            ?>
+        </td>
+        <td>
+          <a href="<?php echo $this->url('noteEdit', array('id' => $note->getId())) ?>" class="btn btn-xs btn-primary">
+              <span class="glyphicon glyphicon-edit"></span> edit
+          </a>
+          <a href="<?php echo $this->url('noteDelete', array('id' => $note->getId())) ?>" class="btn btn-xs btn-danger">
+              <span class="glyphicon glyphicon-trash"></span> delete
+          </a>
+        </td>
+    </tr>
+
+    <?php
+    endforeach;
+    endif;
+    ?>
+</table>
+</div>
+<div class="col-md-2">
+<h4>Action</h4>
+<p>Total notes: <?php echo $notes->count() ?></p>
+<p>Showing: <?php echo $notes->count() ?></p>
+<a href="<?php echo $this->url('noteSegment', array('action' => 'add')) ?>" class="btn btn-primary btn-md">
+Create New Note
+</a>
+</div>
+</div>

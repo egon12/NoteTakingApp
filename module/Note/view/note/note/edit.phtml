@@ -1,0 +1,35 @@
+<h3>Edit Note</h3>
+
+<div class="row">
+<div class="col-md-6">
+    <?php
+    $form->prepare();
+    echo $this->form($form);
+    ?>
+</div>
+
+<div class="col-md-6">
+    <table id="notes" class="table">
+        <tr><th>Title</th><th>Updated</th><th>Content</th><th>User</th></tr>
+        <?php 
+        if ($history->count() > 0):
+        foreach ($history as $note):
+        ?>
+        <tr>
+            <td>
+                <a href="#" id="note_<?php echo $note->getId() ?>" >
+                    <?php echo $note->getTitle(); ?>
+                </a>
+            </td>
+            <td><?php echo $note->getTimestamp(); ?></td>
+            <td><?php echo $note->getBodyExcerpt(); ?></td>
+            <td><?php echo $note->getUserId(); ?></td>
+        </tr>
+
+        <?php
+        endforeach;
+        endif;
+        ?>
+    </table>
+</div>
+</div>
